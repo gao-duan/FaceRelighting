@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{A30550F5-B897-4112-BA8C-B96C883440F5}</ProjectGuid>
+    <RootNamespace>FaceRelighting</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>E:\opencv3.4\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\opencv3.4\x64\vc12\lib;$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)landmark;$(SolutionDir)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalOptions>/Zc:twoPhase- %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opencv_calib3d340.lib;opencv_core340.lib;opencv_dnn340.lib;opencv_features2d340.lib;opencv_flann340.lib;opencv_highgui340.lib;opencv_imgcodecs340.lib;opencv_imgproc340.lib;opencv_ml340.lib;opencv_objdetect340.lib;opencv_photo340.lib;opencv_shape340.lib;opencv_stitching340.lib;opencv_superres340.lib;opencv_video340.lib;opencv_videoio340.lib;opencv_videostab340.lib;dlib.lib;tbb.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="include\BFM.cpp" />
+    <ClCompile Include="include\BFM2Pixel.cpp" />
+    <ClCompile Include="include\color_propagation.cpp" />
+    <ClCompile Include="include\common.cpp" />
+    <ClCompile Include="include\geometry_fit.cpp" />
+    <ClCompile Include="include\image.cpp" />
+    <ClCompile Include="include\landmark.cpp" />
+    <ClCompile Include="include\math_vec.cpp" />
+    <ClCompile Include="include\mesh.cpp" />
+    <ClCompile Include="include\specular_removal_grad.cpp" />
+    <ClCompile Include="include\tex_light_fit.cpp" />
+    <ClCompile Include="landmark\CCNF_patch_expert.cpp" />
+    <ClCompile Include="landmark\LandmarkDetectionValidator.cpp" />
+    <ClCompile Include="landmark\LandmarkDetectorFunc.cpp" />
+    <ClCompile Include="landmark\LandmarkDetectorModel.cpp" />
+    <ClCompile Include="landmark\LandmarkDetectorParameters.cpp" />
+    <ClCompile Include="landmark\LandmarkDetectorUtils.cpp" />
+    <ClCompile Include="landmark\landmark_detection.cpp" />
+    <ClCompile Include="landmark\Patch_experts.cpp" />
+    <ClCompile Include="landmark\PAW.cpp" />
+    <ClCompile Include="landmark\PDM.cpp" />
+    <ClCompile Include="landmark\stdafx.cpp" />
+    <ClCompile Include="landmark\SVR_patch_expert.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\BFM.h" />
+    <ClInclude Include="include\BFM2Pixel.h" />
+    <ClInclude Include="include\color_propagation.h" />
+    <ClInclude Include="include\common.h" />
+    <ClInclude Include="include\geometry_fit.h" />
+    <ClInclude Include="include\image.h" />
+    <ClInclude Include="include\landmark.h" />
+    <ClInclude Include="include\math_vec.h" />
+    <ClInclude Include="include\mesh.h" />
+    <ClInclude Include="include\parameter.h" />
+    <ClInclude Include="include\specular_removal_grad.h" />
+    <ClInclude Include="include\tex_light_fit.h" />
+    <ClInclude Include="landmark\CCNF_patch_expert.h" />
+    <ClInclude Include="landmark\LandmarkCoreIncludes.h" />
+    <ClInclude Include="landmark\LandmarkDetectionValidator.h" />
+    <ClInclude Include="landmark\LandmarkDetectorFunc.h" />
+    <ClInclude Include="landmark\LandmarkDetectorModel.h" />
+    <ClInclude Include="landmark\LandmarkDetectorParameters.h" />
+    <ClInclude Include="landmark\LandmarkDetectorUtils.h" />
+    <ClInclude Include="landmark\landmark_detection.h" />
+    <ClInclude Include="landmark\Patch_experts.h" />
+    <ClInclude Include="landmark\PAW.h" />
+    <ClInclude Include="landmark\PDM.h" />
+    <ClInclude Include="landmark\stdafx.h" />
+    <ClInclude Include="landmark\SVR_patch_expert.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

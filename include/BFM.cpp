@@ -10,7 +10,6 @@ vector<T> load_util(FILE* stream)
 	temp = fread(&len2, sizeof(int), 1, stream);
 	int len = int(len1) * int(len2);
 
-
 	T* res = new T[len];
 	temp = fread(res, sizeof(T), len, stream);
 

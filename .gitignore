@@ -1,3 +1,8 @@
 .vs/
-data/BFM/*
+data/BFM/3DDFA/*
+data/BFM/BaselFaceModel/*
+data/BFM/bfm_data
+data/BFM/bfm_exp
+data/BFM/bfm_attrib.txt
+*.exr
 x64/

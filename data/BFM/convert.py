@@ -3,9 +3,6 @@
 
 import scipy.io as sio
 import numpy as np
-import shutil
-import os
-import pickle
 import struct 
 
 print("Loading mat files.")

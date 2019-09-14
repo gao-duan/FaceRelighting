@@ -18,9 +18,10 @@ Project for reconstructing 3D face from a single image and recovering high-frequ
 ## Compile
 
 - Set opencv and dlib dependencies inside Visual Studio.
-- Download BFM data (https://faces.dmi.unibas.ch/bfm/).
-- Convert BFM data to 3 files: bfm_data, bfm_exp and bfm_attrib.txt (see BFM::load() in bfm.cpp for more details of the file format)
-- Put BFM data into ./data/BFM/
+- Generate BFM data
+  - Download raw BFM data from https://faces.dmi.unibas.ch/bfm/ (Extracting `01_MorphableModel.mat` and `04_attributes.mat` into `./data/BFM/BaselFaceModel/`)
+  - Download 3DDFA from http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/Code/3DDFA.zip  (Extracting `model_info.mat` and `Model_Expression.mat` into `/data/BFM/3DDFA/`)
+  - Run `cd ./data/BFM/ && python convert.py` (dependencies: numpy, scipy) 
 - Build and run.
 
 ## Command line parameters

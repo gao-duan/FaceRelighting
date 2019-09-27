@@ -14,7 +14,7 @@ std::vector<vec2i> get_valid_points_from_obj(const string & name)
 		if (type == "v") {
 			int x, y; float z;
 			ss >> x >> y >> z;
-			points.push_back(vec2i(x, 250 - y));
+			points.push_back(vec2i(x, IMAGE_SIZE - y));
 		}
 	}
 
@@ -49,7 +49,7 @@ std::vector<vec3> get_points_from_obj(const string & name)
 		if (type == "v") {
 			int x, y; float z;
 			ss >> x >> y >> z;
-			points.push_back(vec3(x, 250 - y, z));
+			points.push_back(vec3(x, IMAGE_SIZE - y, z));
 		}
 	}
 
@@ -136,7 +136,7 @@ std::vector<vec3> correct_normals(const vector<vec2i>& valid_points, const vecto
 	}
 	
 	// [visualization] normal_map initial
-	Texture normal_map(250, 250);
+	Texture normal_map(IMAGE_SIZE, IMAGE_SIZE);
 	for (size_t i = 0; i < valid_points.size(); ++i) {
 		vec2i p = valid_points[i];
 		vec3 c = normals[i];
@@ -200,7 +200,7 @@ Texture generate_matte_from_landmarks(std::vector<cv::Point>& points)
 	std::vector<cv::Point> mouth_points(points.begin() + 60, points.begin() + 68);
 
 	vector<vector<cv::Point> >  hull(4);
-	Mat drawing = Mat::zeros(cv::Size(250, 250), CV_8UC3);
+	Mat drawing = Mat::zeros(cv::Size(IMAGE_SIZE, IMAGE_SIZE), CV_8UC3);
 	cv::convexHull(cv::Mat(points), hull[0], false, true);
 	cv::convexHull(cv::Mat(left_eye_points), hull[1], false, true);
 	cv::convexHull(cv::Mat(right_eye_points), hull[2], false, true);
@@ -254,7 +254,7 @@ Texture generate_nose_matte_from_landmarks(const string & name)
 	nose_points.push_back(ref2);
 
 	vector<vector<cv::Point> >  hull(3);
-	Mat drawing = Mat::zeros(cv::Size(250, 250), CV_8UC3);
+	Mat drawing = Mat::zeros(cv::Size(IMAGE_SIZE, IMAGE_SIZE), CV_8UC3);
 	cv::convexHull(cv::Mat(nose_points), hull[0], false, true);
 
 	cv::drawContours(drawing, hull, 0, cv::Scalar(255, 255, 255), CV_FILLED);
@@ -303,7 +303,7 @@ Texture generate_eye_mouth_matte_from_landmarks(const std::vector<cv::Point>& po
 	std::vector<cv::Point> mouth_points(points.begin() + 48, points.begin() + 60);
 
 	vector<vector<cv::Point> >  hull(3);
-	Mat drawing = Mat::zeros(cv::Size(250, 250), CV_8UC3);
+	Mat drawing = Mat::zeros(cv::Size(IMAGE_SIZE, IMAGE_SIZE), CV_8UC3);
 	cv::convexHull(cv::Mat(left_eye_points), hull[0], false, true);
 	cv::convexHull(cv::Mat(right_eye_points), hull[1], false, true);
 	cv::convexHull(cv::Mat(mouth_points), hull[2], false, true);
@@ -420,7 +420,7 @@ Image depth_map(const string & name)
 {
 	ifstream in(name);
 	
-	Image img(250, 250);
+	Image img(IMAGE_SIZE, IMAGE_SIZE);
 	img.img  = cv::Scalar(0, 0, 0);
 
 	string line;
@@ -437,7 +437,7 @@ Image depth_map(const string & name)
 		if (type == "v") {
 			int x, y; float z;
 			ss >> x >> y >> z;
-			points.push_back({ x, 250 - y, z });
+			points.push_back({ x, IMAGE_SIZE - y, z });
 		}
 	}
 
@@ -463,7 +463,7 @@ Image matte_map(const string & name)
 {
 	ifstream in(name);
 
-	Image img(250, 250);
+	Image img(IMAGE_SIZE, IMAGE_SIZE);
 	img.img = cv::Scalar(0, 0, 0);
 
 	string line;
@@ -477,7 +477,7 @@ Image matte_map(const string & name)
 		if (type == "v") {
 			int x, y; float z;
 			ss >> x >> y >> z;
-			points.push_back({ x, 250 - y});
+			points.push_back({ x, IMAGE_SIZE - y});
 		}
 	}
 

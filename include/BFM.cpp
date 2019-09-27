@@ -410,7 +410,7 @@ bool BFM::write_to_ply(const string & name, bool inverse_y)
 
 	for (int i = 0; i < n_vertex; ++i) {
 		if(inverse_y) {
-			out << std::fixed << std::setprecision(8) << vertices[i * 3] << " " << 250 - vertices[i * 3 + 1] << " " << vertices[i * 3 + 2] << " "
+			out << std::fixed << std::setprecision(8) << vertices[i * 3] << " " << IMAGE_SIZE - vertices[i * 3 + 1] << " " << vertices[i * 3 + 2] << " "
 				<< int(c[i * 3]) << " " << int(c[i * 3 + 1]) << " " << int(c[i * 3 + 2]) << endl;
 		}
 		else {

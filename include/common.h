@@ -80,6 +80,7 @@ T random(T begin, T end) {
 	return ((T)rand()) / (T)RAND_MAX * (end - begin) + begin;
 }
 
+extern int IMAGE_SIZE;
 
 
 

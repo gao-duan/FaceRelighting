@@ -94,7 +94,7 @@ void BFM2Pixel::test()
 	}
 	in.close();
 
-	Image res(250, 250);
+	Image res(IMAGE_SIZE, IMAGE_SIZE);
 	for (int i = 0; i < res.height; ++i) {
 		for (int j = 0; j < res.width; ++j) {
 			res.setPixel(j, i, Vec3b(255, 0, 0));

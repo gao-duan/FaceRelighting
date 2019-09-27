@@ -12,6 +12,12 @@
 #include "tex_light_fit.h"
 #include "specular_removal_grad.h"
 
+#ifdef _WIN32
+#include <Windows.h>
+#elif __linux__
+#endif // _WIN32
+
+
 
 void optimize_single_image(const string& src_path, Texture& optmize, Texture& matte,
 	Texture& orig_albedo, Texture& optmize_albedo, Texture& specular_remove_albedo, std::vector<vec3i> landmarks,
@@ -45,7 +51,7 @@ void optimize_single_image(const string& src_path, Texture& optmize, Texture& ma
 
 	Landmarks lm;
 	bool ret = lm.load(&bfm, landmarks);
-	PoseOptimizer geo_opt(9 + ALPHA_SIZE + GAMMA_SIZE, lm.size, 40, &bfm, &lm, 250, 250);
+	PoseOptimizer geo_opt(9 + ALPHA_SIZE + GAMMA_SIZE, lm.size, 40, &bfm, &lm, IMAGE_SIZE, IMAGE_SIZE);
 	geo_opt.optimize();
 	geo_params = geo_opt.get_params();
 	geo_opt.save_parameter_to_file(res_path + "geo_params.txt");
@@ -100,6 +106,19 @@ void optimize_single_image(const string& src_path, Texture& optmize, Texture& ma
 
 std::string res_path;
 std::string solution_dir;
+int IMAGE_SIZE;
+
+void CreateFolder(const char* path)
+{	
+#ifdef _WIN32
+	if (!CreateDirectory(path, NULL))
+	{
+		return;
+	}
+#else
+	std::cout << "Please create path: " << path << std::endl;
+#endif
+}
 
 int main(int argc, char** argv) {
 	if (argc < 2) {
@@ -113,8 +132,15 @@ int main(int argc, char** argv) {
 	solution_dir = std::string(argv[1]);
 	res_path = std::string(argv[2]);
 	string src_path = std::string(argv[3]);
+	IMAGE_SIZE = (argc > 4) ? atoi(argv[4]) : 250;
+	std::cout << "Image size: " << IMAGE_SIZE << std::endl;
+
 	bool relit = true;
-	bool prop = false; // a little bit slow for propagation process.
+	bool prop = true; // a little bit slow for propagation process.
+
+	CreateFolder(res_path.c_str());
+	if(relit) CreateFolder((res_path + "relit/").c_str());
+	if(prop) CreateFolder((res_path + "prog/").c_str());
 
 	Texture optmize, matte, orig_albedo, optmize_albedo, specular_remove_albedo;
 	std::vector<vec3i> landmarks;

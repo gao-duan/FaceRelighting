@@ -130,7 +130,7 @@ TriangleMesh::TriangleMesh(int n_vertex, int n_triangle, const vector<float>& _v
 		Triangle tri(p1, p2, p3, n1, n2, n3);
 		triangles.push_back(tri);
 	}
-	accel = new GridAccel(triangles, 250);
+	accel = new GridAccel(triangles, IMAGE_SIZE);
 	delete[] normals;
 	delete[] indices;
 	delete[] vertices;
@@ -218,9 +218,9 @@ GridAccel::GridAccel(const vector<Triangle>& triangles, int n)
 		int min_y = std::min(p1.y, std::min(p2.y, p3.y)) - 1;
 		int max_y = std::max(p1.y, std::max(p2.y, p3.y)) + 1;
 		if (min_x < 0) min_x = 0;
-		if (max_x >= 250) max_x = 249;
+		if (max_x >= IMAGE_SIZE) max_x = IMAGE_SIZE - 1;
 		if (min_y < 0) min_y = 0;
-		if (max_y >= 250) max_y = 249;
+		if (max_y >= IMAGE_SIZE) max_y = IMAGE_SIZE - 1;
 		
 		for (int x = min_x; x <= max_x; ++x) {
 			for (int y = min_y; y <= max_y; ++y) {
@@ -251,8 +251,7 @@ bool GridAccel::intersect(Ray & ray, int & face_idx)
 
 GridAccel::~GridAccel()
 {
-	int n = 250;
-	for (int i = 0; i < n; ++i) {
+	for (int i = 0; i < IMAGE_SIZE; ++i) {
 		delete[] nodes[i];
 	}
 	delete[] nodes;

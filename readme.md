@@ -26,13 +26,25 @@ Project for reconstructing 3D face from a single image and recovering high-frequ
 
 ## Command line parameters
 
-```./FaceRelighting.exe $SOLUTION_PATH  $OUTPUT_FOLDER  $INPUT_IMAGE_PATH```
+- run 
 
-> Example:
->
-> cd FaceRelighting
->
-> PATH_TO_EXE/FaceRelighting.exe   ./  ./res/  ./data/example/image.png
+  ```./FaceRelighting.exe $SOLUTION_PATH  $OUTPUT_FOLDER  $INPUT_IMAGE_PATH [$IMAGE_RESOLUTION]```
+
+  >  Example:
+  >
+  > cd FaceRelighting
+  >
+  > PATH_TO_EXE/FaceRelighting.exe   ./  ./res/  ./data/example/image.png 250
+
+  $IMAGE_RESOLUTION is the image size of input image. (default value is 250, means 250 x 250)
+
+  Please make sure the input image is square (width equals to height).
+
+  
+
+- Convert to GIF (using ImageMagick)
+
+  >  convert '%d.bmp[0-19]' out.gif 
 
 
 

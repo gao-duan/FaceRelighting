@@ -74,8 +74,8 @@ TexLightOptimizer::TexLightOptimizer(BFM * _bfm, const vector<vec2i>& _valid_poi
 		}
 		else valids.push_back(true);
 	}
-	_albedo = Texture(250, 250);
-	seg = Texture(250, 250);
+	_albedo = Texture(IMAGE_SIZE, IMAGE_SIZE);
+	seg = Texture(IMAGE_SIZE, IMAGE_SIZE);
 	for (size_t i = 0; i < valid_points.size(); ++i) {
 		vec2i p = valid_points[i];
 		FacePoint fp = face_points[i];
@@ -160,13 +160,11 @@ vector<float> TexLightOptimizer::f_col(const std::vector<Parameter>& p,bool flag
 	}
 
 	int width = ref_img.width, height = ref_img.height;
-	int tex2idx[250][250];
-	memset(tex2idx, 0, 250 * 250 * sizeof(int));
+
 	Texture fit_img(width, height);
 	vector<vec3> ref_color(constraits_num), fit_color(constraits_num);
 
 	for (size_t idx = 0; idx < valid_points.size(); idx += 10) {
-		tex2idx[valid_points[idx].x][valid_points[idx].y] = idx;
 		if (idx / 10 > constraits_num - 1) continue;
 	
 		// 2. get valid_points albedo
@@ -194,16 +192,7 @@ vector<float> TexLightOptimizer::f_col(const std::vector<Parameter>& p,bool flag
 	}
 
 	// 5. blur fit_color
-	//float sssWidth = 0.025 / 20;
-	//fit_img = UnionTexture(ref_img, fit_img, matte_img);
-	//Texture blur_img = Blur(fit_img, depth_img, sssWidth, matte_img);
-
-	//for (int i = 0; i < width; ++i) {
-	//	for (int j = 0; j < height; ++j) {
-	//		int idx = tex2idx[i][j];
-	//		fit_color[idx] = blur_img.getPixel(i, j);
-	//	}
-	//}
+	
 	// 6. convert fit_color to vector<vec3> and get loss
 	for (size_t i = 0; i < constraits_num; ++i) {
 		res[i] = (ref_color[i] - fit_color[i]).length();
@@ -382,7 +371,7 @@ void TexLightOptimizer::load_parameter_from_vector(const vector<float>& _params)
 }
 
 Texture TexLightOptimizer::render_by_parameters(const std::vector<vec3>& _sh, bool flag) {
-	Texture res(250, 250);
+	Texture res(IMAGE_SIZE, IMAGE_SIZE);
 
 	for (size_t idx = 0; idx < valid_points.size(); ++idx) {
 		vec2i pos = valid_points[idx];
@@ -401,7 +390,7 @@ Texture TexLightOptimizer::render_by_parameters(const std::vector<vec3>& _sh, bo
 
 Texture TexLightOptimizer::render_by_parameters(const vec3 & dir, const vec3 & color)
 {
-	Texture res(250, 250);
+	Texture res(IMAGE_SIZE, IMAGE_SIZE);
 
 	for (size_t idx = 0; idx < valid_points.size(); ++idx) {
 		vec2i pos = valid_points[idx];
@@ -445,8 +434,8 @@ void blur(Texture& img, vec2i beg, vec2i end) {
 
 Texture TexLightOptimizer::generate_final_texture()
 {
-	Texture albedo(250, 250);
-	Texture orig(250, 250);
+	Texture albedo(IMAGE_SIZE, IMAGE_SIZE);
+	Texture orig(IMAGE_SIZE, IMAGE_SIZE);
 
 	Texture res_fit = render_by_parameters(sh);
 	
@@ -464,7 +453,7 @@ Texture TexLightOptimizer::generate_final_texture()
 
 Texture TexLightOptimizer::generate_original_texture()
 {
-	Texture orig(250, 250);
+	Texture orig(IMAGE_SIZE, IMAGE_SIZE);
 	for (size_t idx = 0; idx < valid_points.size(); ++idx) {
 		vec2i p = valid_points[idx];
 		FacePoint fp = face_points[idx];
@@ -486,7 +475,7 @@ void TexLightOptimizer::relighting(const std::vector<vec3>& new_sh, const Textur
 	orig.save(res_path + "relit_orig.bmp");
 	orig.saveHDR(res_path + "relit_orig.exr");
 
-	Texture tmp(250, 250);
+	Texture tmp(IMAGE_SIZE, IMAGE_SIZE);
 	float lumiance = 0;
 	for (size_t idx = 0; idx < valid_points.size(); ++idx) {
 		FacePoint fp = face_points[idx];
@@ -508,7 +497,7 @@ void TexLightOptimizer::relighting(const std::vector<vec3>& new_sh, const Textur
 	tmp.save(res_path + "relit_albedo_color2.bmp");
 
 
-	Texture res(250, 250);
+	Texture res(IMAGE_SIZE, IMAGE_SIZE);
 
 	for (size_t idx = 0; idx < valid_points.size(); ++idx) {
 		res.setPixel(valid_points[idx].x, valid_points[idx].y, orig.getPixel(valid_points[idx]) * albedo_img.getPixel(valid_points[idx]));
@@ -530,7 +519,7 @@ void TexLightOptimizer::relighting_video(const Texture & albedo_img, bool prop)
 	float step = 180.0 / N;
 	for (int i = 0; i <= N; ++i) {
 		vec3 dir = Rotate(0, -step * i, 0) * light_dir;
-		Texture res(250, 250);
+		Texture res(IMAGE_SIZE, IMAGE_SIZE);
 
 		for (size_t idx = 0; idx < valid_points.size(); ++idx) {
 			vec2i pos = valid_points[idx];
